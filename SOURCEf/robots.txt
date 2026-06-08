@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /admin
+Disallow: /captcha
+Disallow: /imemail
+Disallow: /muy-bien.html
+Disallow: /enviado.html
+Disallow: /tyc-ap.html
+Disallow: /404.html
+Disallow: /medialuna.html
+Disallow: /temp-ini.html
+Disallow: /remove-design.html
+Disallow: /ideas.html
+Disallow: /test-grey.html
+Disallow: /test-blue.html
+Disallow: /ideas-copiar.html
+Disallow: /video/birds1.mp4
+
+Sitemap: https://blocksale.mx/sitemap.xml

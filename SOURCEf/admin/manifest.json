@@ -1,0 +1,11 @@
+{
+	"name": "BlocksaleMx Admin",
+	"start_url": "https://blocksale.mx/admin/",
+	"display": "standalone",
+	"background_color": "#E5E5E5",
+	"theme_color": "#F28D4F",
+	"scope": "https://blocksale.mx/admin/",
+	"icons": [
+		{ "src": "https://blocksale.mx/admin/images/logo_zwsjvq04.webp", "type": "image/png", "sizes": "126x126" }
+	]
+}
