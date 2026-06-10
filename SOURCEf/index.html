@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio — Blocksale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  :root{
+    --orange:#F26522;--orange-deep:#D9501A;--orange-soft:#FF8348;
+    --navy:#283A6E;--navy-2:#22315E;--navy-3:#1A2750;--navy-4:#13204A;--navy-ink:#0F1A3A;
+    --paper:#FFFFFF;--mist:#EAF1FB;--mist-2:#DCE8F7;--line:#DCE6F4;
+    --muted:#5B6B86;--muted-d:#AEBDD6;--muted-dd:#8595B8;
+    --maxw:1240px;--r-xl:32px;--r-lg:22px;--r-md:14px;--r-sm:11px;
+    --shadow:0 40px 90px -38px rgba(15,26,58,.55);
+    --shadow-sm:0 16px 40px -22px rgba(15,26,58,.42);
+    --house:polygon(50% 0%, 100% 26%, 100% 100%, 0% 100%, 0% 26%);
+    --f-head:'Sora',system-ui,sans-serif;--f-body:'Plus Jakarta Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--f-body);color:var(--navy-ink);background:#F2F6FC;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:var(--f-head);line-height:1.06;letter-spacing:-.025em;font-weight:800}
+  .eyebrow{font-family:var(--f-head);font-weight:700;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.6rem;color:var(--orange)}
+  .eyebrow::before{content:"";width:30px;height:2px;background:var(--orange)}
+  .eyebrow.c{justify-content:center}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--f-head);font-weight:700;font-size:1rem;padding:.98rem 1.8rem;border-radius:999px;cursor:pointer;border:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .2s;white-space:nowrap}
+  .btn svg{width:18px;height:18px}
+  .btn-primary{background:linear-gradient(135deg,var(--orange-soft),var(--orange));color:#fff;box-shadow:0 16px 34px -12px rgba(242,101,34,.65)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 44px -14px rgba(242,101,34,.8)}
+  .btn-light{background:#fff;color:var(--navy)}
+  .btn-light:hover{transform:translateY(-2px);box-shadow:0 18px 36px -16px rgba(0,0,0,.35)}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--navy);transform:translateY(-2px)}
+  .btn-ghost-l{background:rgba(255,255,255,.07);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-l:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+  header{position:sticky;top:0;z-index:60;background:transparent;transition:.35s}
+  header.scrolled{background:rgba(19,32,74,.92);backdrop-filter:blur(14px);box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .brand{display:flex;align-items:center;gap:.65rem;font-family:var(--f-head);font-weight:800;font-size:1.32rem;letter-spacing:-.03em;color:#fff}
+  .brand .mark{width:28px;height:28px;background:linear-gradient(135deg,var(--orange-soft),var(--orange));clip-path:var(--house);flex:none;transition:transform .4s}
+  .brand:hover .mark{transform:translateY(-2px) scale(1.06)}
+  .brand b{color:var(--orange-soft)}
+  .nav-links{display:flex;align-items:center;gap:1.9rem;font-weight:600;font-size:.93rem}
+  .nav-links a{color:rgba(255,255,255,.78);transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .nav-links a.active{color:#fff;position:relative}
+  .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--orange);border-radius:2px}
+  .nav-cta .btn{padding:.62rem 1.2rem;font-size:.9rem}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+  .menu-btn span{width:24px;height:2px;background:#fff;display:block}
+  .hero{position:relative;color:#fff;overflow:hidden;padding:120px 0 130px;margin-top:-78px}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(900px 540px at 10% -10%,rgba(64,90,160,.55),transparent 60%),radial-gradient(820px 640px at 94% 6%,rgba(242,101,34,.32),transparent 56%),linear-gradient(150deg,#13204A 0%,#1E2C58 48%,#283A6E 100%)}
+  .hero-grid{position:absolute;inset:0;z-index:1;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(180deg,#000 0%,transparent 80%)}
+  .orb{position:absolute;border-radius:50%;filter:blur(50px);z-index:0;opacity:.6}
+  .orb.a{width:440px;height:440px;background:rgba(242,101,34,.34);top:-120px;right:2%;animation:float1 12s ease-in-out infinite}
+  .orb.b{width:380px;height:380px;background:rgba(86,130,236,.3);bottom:-80px;left:-70px;animation:float2 15s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(28px)}}
+  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-26px)}}
+  @media(prefers-reduced-motion:reduce){.orb{animation:none}}
+  .hero .wrap{position:relative;z-index:3}
+  .hero-grid2{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+  .hero .eyebrow{color:var(--orange-soft)}
+  .hero .eyebrow::before{background:var(--orange-soft)}
+  .hero h1{font-size:clamp(2.7rem,5.8vw,4.6rem);margin:1.3rem 0 0;letter-spacing:-.035em}
+  .hero h1 .grad{background:linear-gradient(105deg,#fff 25%,var(--orange-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lead{font-size:1.2rem;color:rgba(255,255,255,.86);max-width:44ch;margin:1.3rem 0 2.1rem}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .hero-pills{display:flex;flex-wrap:wrap;gap:12px;margin-top:2.3rem}
+  .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.62rem 1.05rem;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);font-weight:600;font-size:.9rem}
+  .pill svg{width:17px;height:17px;color:var(--orange-soft);flex:none}
+  .hero-visual{position:relative}
+  .hero-house{width:100%;max-width:430px;aspect-ratio:1/1.12;clip-path:var(--house);background:var(--navy-3);margin-left:auto;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+  .hero-float{position:absolute;left:-10px;bottom:34px;background:#fff;border-radius:var(--r-md);box-shadow:var(--shadow);padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;z-index:4}
+  .hero-float .ic{width:42px;height:42px;border-radius:11px;background:rgba(242,101,34,.12);color:var(--orange-deep);display:grid;place-items:center;flex:none}
+  .hero-float .ic svg{width:21px;height:21px}
+  .hero-float b{font-family:var(--f-head);font-size:.95rem;display:block;color:var(--navy)}
+  .hero-float span{font-size:.8rem;color:var(--muted)}
+  .band{background:#fff;position:relative;z-index:5;margin-top:-56px}
+  .band .wrap{background:#fff;border-radius:var(--r-xl);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);max-width:1140px;overflow:hidden}
+  .band .item{display:flex;align-items:center;gap:.9rem;padding:1.7rem 1.7rem;border-right:1px solid var(--line)}
+  .band .item:last-child{border-right:0}
+  .band .item .bi{width:46px;height:46px;border-radius:12px;background:rgba(242,101,34,.1);color:var(--orange-deep);display:grid;place-items:center;flex:none}
+  .band .item .bi svg{width:23px;height:23px}
+  .band .item b{font-family:var(--f-head);font-weight:700;font-size:1rem;display:block;line-height:1.2;color:var(--navy)}
+  .band .item span{font-size:.82rem;color:var(--muted)}
+  section.block{padding:108px 0}
+  .sec-head{max-width:680px;margin-bottom:3rem}
+  .sec-head.c{margin-inline:auto;text-align:center}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);color:var(--navy);margin:1rem 0}
+  .sec-head p{font-size:1.1rem;color:var(--muted)}
+  .about{background:linear-gradient(160deg,#1A2750,#283A6E);color:#fff;position:relative;overflow:hidden}
+  .about .deco{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(242,101,34,.16),transparent 66%);top:-200px;right:-180px;z-index:0}
+  .about .wrap{position:relative;z-index:1}
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .feature+.feature{margin-top:96px}
+  .feature.rev .ftxt{order:2}
+  .feature .eyebrow{color:var(--orange-soft)}
+  .feature .eyebrow::before{background:var(--orange-soft)}
+  .feature h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:#fff;margin:1rem 0 1.2rem}
+  .feature h2 .hl{color:var(--orange-soft)}
+  .feature p{color:var(--muted-d);font-size:1.08rem}
+  .feature p strong{color:#fff}
+  .house-wrap{position:relative;display:flex;justify-content:center}
+  .house{width:100%;max-width:430px;aspect-ratio:1/1.16;clip-path:var(--house);background:var(--navy-3)}
+  .values{background:#F2F6FC}
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .vcard{background:#fff;border-radius:var(--r-xl);padding:2.8rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;border:1px solid var(--line);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .vcard:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .vcard::before{content:"";position:absolute;left:0;top:2.8rem;bottom:2.8rem;width:5px;border-radius:3px;background:linear-gradient(var(--orange-soft),var(--orange))}
+  .vcard .ic{width:58px;height:58px;border-radius:15px;background:linear-gradient(135deg,var(--orange-soft),var(--orange));color:#fff;display:grid;place-items:center;margin-bottom:1.5rem;margin-left:1.2rem;box-shadow:0 12px 24px -10px rgba(242,101,34,.6)}
+  .vcard .ic svg{width:28px;height:28px}
+  .vcard .body{padding-left:1.2rem}
+  .vcard h3{font-size:1.7rem;color:var(--navy);margin-bottom:.9rem}
+  .vcard p{color:var(--muted);font-size:1.01rem}
+  .vcard p+p{margin-top:.9rem}
+  .steps{background:#fff}
+  .pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:.5rem}
+  .paso{position:relative;padding:0 1.4rem}
+  .paso:first-child{padding-left:0}
+  .paso .num{font-family:var(--f-head);font-weight:800;font-size:1.1rem;width:60px;height:60px;clip-path:var(--house);background:var(--navy);color:#fff;display:grid;place-items:center;margin-bottom:1.5rem;transition:.3s}
+  .paso:hover .num{background:linear-gradient(135deg,var(--orange-soft),var(--orange));transform:translateY(-4px)}
+  .paso .track{position:absolute;top:30px;left:60px;right:0;height:2px;background:var(--line)}
+  .paso .track::before{content:"";position:absolute;inset:0;background:var(--orange);width:0;transition:width .9s ease}
+  .paso.on .track::before{width:100%}
+  .paso:last-child .track{display:none}
+  .paso h3{font-size:1.25rem;color:var(--navy);margin-bottom:.5rem}
+  .paso p{font-size:.96rem;color:var(--muted)}
+  .cta{padding:40px 0 110px;background:#fff}
+  .cta-card{position:relative;overflow:hidden;border-radius:var(--r-xl);padding:80px 56px;text-align:center;color:#fff;background:radial-gradient(700px 400px at 85% 10%,rgba(242,101,34,.42),transparent 60%),linear-gradient(150deg,#1A2750,#283A6E)}
+  .cta-card .ring{position:absolute;border-radius:50%;border:1.5px solid rgba(255,255,255,.18)}
+  .cta-card .r1{width:360px;height:360px;top:-160px;left:-110px}
+  .cta-card .r2{width:260px;height:260px;bottom:-150px;right:-80px}
+  .cta-card .in{position:relative;z-index:2}
+  .cta-card .eyebrow{justify-content:center;color:#fff}.cta-card .eyebrow::before{background:#fff}
+  .cta-card h2{font-size:clamp(2rem,4.2vw,3.2rem);max-width:20ch;margin:1rem auto 1rem;color:#fff}
+  .cta-card p{font-size:1.18rem;color:rgba(255,255,255,.9);max-width:46ch;margin:0 auto 2.2rem}
+  .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .cta-card .note{margin-top:1.4rem;font-size:.92rem;color:rgba(255,255,255,.8)}
+  footer{background:var(--navy-4);color:#fff;padding:74px 0 32px}
+  .foot-top{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:36px;padding-bottom:18px}
+  .foot-brand .brand{color:#fff;margin-bottom:1rem}.foot-brand .brand b{color:var(--orange-soft)}
+  .foot-brand p{color:var(--muted-d);max-width:30ch;font-size:.95rem}
+  .foot-soc{display:flex;gap:.7rem;margin-top:1.3rem}
+  .foot-soc a{width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:.25s}
+  .foot-soc a:hover{background:var(--orange);transform:translateY(-3px)}
+  .foot-soc svg{width:20px;height:20px;color:#fff}
+  .fcol h4{font-family:var(--f-head);font-weight:700;font-size:.95rem;color:#fff;margin-bottom:1.1rem}
+  .fcol a{display:block;color:var(--muted-d);font-size:.94rem;margin-bottom:.75rem;transition:color .2s;width:fit-content}
+  .fcol a:hover{color:var(--orange-soft)}
+  .foot-div{height:3px;background:var(--orange);border-radius:3px;margin:14px 0 36px;opacity:.9}
+  .foot-contact{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .crow{display:flex;gap:.8rem;margin-bottom:1.2rem;color:var(--muted-d);font-size:.93rem;line-height:1.5}
+  .crow svg{width:20px;height:20px;color:var(--orange-soft);flex:none;margin-top:2px}
+  .crow b{color:#fff;font-weight:600;display:block;font-family:var(--f-head);margin-bottom:.1rem}
+  .crow a:hover{color:var(--orange-soft)}
+  .foot-bottom{padding-top:28px;margin-top:36px;border-top:1px solid rgba(255,255,255,.1);color:var(--muted-d);font-size:.86rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .wa-float{position:fixed;right:22px;bottom:22px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(37,211,102,.6);transition:transform .25s}
+  .wa-float:hover{transform:scale(1.08)}
+  .wa-float svg{width:31px;height:31px;color:#fff}
+  .wa-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:pulse 2.4s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+  .reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+  html.js .reveal{opacity:0;transform:translateY(28px)}
+  html.js .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+  @media(prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none}}
+  /* mobile drawer */
+  .mob-drawer{position:fixed;inset:0;z-index:200;pointer-events:none}
+  .mob-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .3s}
+  .mob-panel{position:absolute;top:0;right:0;bottom:0;width:280px;background:var(--navy-4);padding:28px 24px;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);overflow-y:auto}
+  .mob-drawer.open .mob-overlay{opacity:1;pointer-events:all}
+  .mob-drawer.open .mob-panel{transform:none;pointer-events:all}
+  .mob-close{background:none;border:0;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;width:100%;margin-bottom:28px}
+  .mob-close svg{width:24px;height:24px;color:#fff}
+  .mob-brand{display:flex;align-items:center;gap:.65rem;font-family:var(--f-head);font-weight:800;font-size:1.32rem;letter-spacing:-.03em;color:#fff;margin-bottom:2rem}
+  .mob-brand .mark{width:28px;height:28px;background:linear-gradient(135deg,var(--orange-soft),var(--orange));clip-path:var(--house);flex:none}
+  .mob-brand b{color:var(--orange-soft)}
+  .mob-nav{display:flex;flex-direction:column;gap:4px}
+  .mob-nav a{color:rgba(255,255,255,.8);font-weight:600;font-size:1.05rem;padding:.75rem .5rem;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s;font-family:var(--f-body)}
+  .mob-nav a:hover,.mob-nav a.active{color:#fff}
+  .mob-wa{display:flex;align-items:center;gap:.6rem;margin-top:1.8rem;background:linear-gradient(135deg,var(--orange-soft),var(--orange));color:#fff;font-family:var(--f-head);font-weight:700;font-size:.95rem;padding:.85rem 1.2rem;border-radius:999px;justify-content:center;text-align:center}
+  @media(max-width:980px){
+    .hero-grid2{grid-template-columns:1fr;gap:44px}
+    .hero-visual{max-width:440px}
+    .band .wrap{grid-template-columns:1fr 1fr}
+    .band .item:nth-child(2){border-right:0}
+    .feature,.vgrid{grid-template-columns:1fr;gap:40px}
+    .feature.rev .ftxt{order:0}.feature .house-wrap{max-width:420px;margin-inline:auto}
+    .pasos{grid-template-columns:1fr 1fr;gap:40px 24px}.paso .track{display:none}
+    .foot-top{grid-template-columns:1fr 1fr}.foot-contact{grid-template-columns:1fr}
+  }
+  @media(max-width:820px){
+    .nav-links,.nav-cta{display:none}.menu-btn{display:flex}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 20px}
+    section.block{padding:72px 0}
+    .band .wrap{grid-template-columns:1fr}.band .item{border-right:0;border-bottom:1px solid var(--line)}
+    .pasos{grid-template-columns:1fr}.cta-card{padding:56px 26px}
+    .foot-top{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body id="top">
+<div class="mob-drawer" id="mob-drawer">
+  <div class="mob-overlay" id="mob-overlay"></div>
+  <div class="mob-panel">
+    <button class="mob-close" id="mob-close" aria-label="Cerrar menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <a href="index.html" class="mob-brand"><span class="mark"></span>Block<b>sale</b></a>
+    <nav class="mob-nav">
+      <a href="acerca-de-blocksale.html">Quiénes somos</a>
+      <a href="conoce-a-nuestros-clientes.html">Testimonios</a>
+      <a href="cuestionario.html">Quiero vender</a>
+      <a href="quiero-invertir.html">Quiero invertir</a>
+      <a href="#contacto">Contáctanos</a>
+    </nav>
+    <a href="https://api.whatsapp.com/send?phone=+525574496392&text=%C2%A1Hola!+Solicito+informaci%C3%B3n...+" class="mob-wa">Cuéntanos tu problema</a>
+  </div>
+</div>
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="mark"></span>Block<b>sale</b></a>
+    <nav class="nav-links">
+      <a href="acerca-de-blocksale.html">Quiénes somos</a>
+      <a href="conoce-a-nuestros-clientes.html">Testimonios</a>
+      <a href="cuestionario.html">Quiero vender</a>
+      <a href="quiero-invertir.html">Quiero invertir</a>
+      <a href="#contacto">Contáctanos</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://api.whatsapp.com/send?phone=+525574496392&text=%C2%A1Hola!+Solicito+informaci%C3%B3n...+" class="btn btn-primary">Cuéntanos tu problema</a>
+    </div>
+    <button class="menu-btn" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <span class="orb a"></span><span class="orb b"></span>
+  <div class="wrap">
+    <div class="hero-grid2">
+      <div class="hero-copy">
+        <span class="eyebrow reveal">Regularizamos · Resolvemos · Vendemos</span>
+        <h1 class="reveal d1">Te ayudamos con tu propiedad para que <span class="grad">vivas en paz</span></h1>
+        <p class="lead reveal d2">Transformamos los problemas legales de tu propiedad en soluciones claras —herencias, remates, copropiedad y escrituras— y tú no pones nada por adelantado.</p>
+        <div class="hero-actions reveal d3">
+          <a href="cuestionario.html" class="btn btn-primary">Cuéntanos tu problema <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#proceso" class="btn btn-ghost-l">Cómo funciona</a>
+        </div>
+        <div class="hero-pills reveal d4">
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Sin pago anticipado</span>
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Equipo completo</span>
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>100% a resultados</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal d2">
+        <div class="hero-house"><image-slot id="hero-photo" shape="rect" placeholder="Foto: familia frente a su hogar"></image-slot></div>
+        <div class="hero-float">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div><b>Caso resuelto</b><span>Propiedad regularizada y vendida</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="band">
+  <div class="wrap">
+    <div class="item"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span><b>Sin pago anticipado</b><span>Adelantamos los gastos</span></span></div>
+    <div class="item"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span><b>Equipo completo</b><span>Abogados, gestores y brokers</span></span></div>
+    <div class="item"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></span><span><b>100% a resultados</b><span>Ganamos cuando tú ganas</span></span></div>
+    <div class="item"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span><b>CDMX y Jalisco</b><span>Dos oficinas para atenderte</span></span></div>
+  </div>
+</div>
+<section class="block about" id="nosotros">
+  <span class="deco"></span>
+  <div class="wrap">
+    <div class="feature reveal">
+      <div class="ftxt">
+        <span class="eyebrow">Nuestra razón de ser</span>
+        <h2>Tu derecho a una vivienda <span class="hl">segura</span></h2>
+        <p>En México —como en muchas partes del mundo— el acceso a una vivienda adecuada es un derecho humano que debe protegerse. Una de sus dimensiones más importantes es la <strong>"seguridad en la tenencia de la vivienda"</strong>: que las personas tengan las condiciones que garanticen la protección jurídica de sus propiedades, para su libre disposición y contra el desalojo u hostigamiento.</p>
+      </div>
+      <div class="house-wrap"><div class="house"><image-slot id="casa-1" shape="rect" placeholder="Casa amarilla / familia"></image-slot></div></div>
+    </div>
+    <div class="feature rev reveal">
+      <div class="ftxt">
+        <span class="eyebrow">Nuestra misión</span>
+        <h2>Más familias con <span class="hl">tranquilidad</span></h2>
+        <p><strong>Blocksale</strong> nace con la misión de proteger ese derecho para que más familias tengan seguridad sobre la tenencia de su propiedad y puedan disponer de ella de manera segura, ágil y sin sacrificar su capacidad económica. Así contribuimos a la regularización del desarrollo urbano en México, ayudando a que más familias adquieran una propiedad a mejor costo.</p>
+      </div>
+      <div class="house-wrap"><div class="house"><image-slot id="casa-2" shape="rect" placeholder="Familia en su hogar"></image-slot></div></div>
+    </div>
+  </div>
+</section>
+<section class="block values" id="valores">
+  <div class="wrap">
+    <div class="sec-head c reveal">
+      <span class="eyebrow c">Por qué Blocksale</span>
+      <h2>Resolvemos lo que nadie más quiere atender</h2>
+      <p>Dos razones por las que las familias nos confían el problema que más les preocupa.</p>
+    </div>
+    <div class="vgrid">
+      <div class="vcard reveal d1">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="body">
+          <h3>Despreocúpate</h3>
+          <p>Sabemos que arreglar los problemas de una propiedad implica gastos elevados. Con Blocksale no tendrás que preocuparte: durante todo el proceso <strong>nosotros anticipamos los gastos</strong> necesarios para regularizar y vender tu propiedad.</p>
+          <p>Estamos enfocados 100% a resultados, para darte la seguridad que necesitas y la libertad de destinar tus recursos de mejor manera.</p>
+        </div>
+      </div>
+      <div class="vcard reveal d2">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <div class="body">
+          <h3>Todo en un solo lugar</h3>
+          <p>Para arreglar y vender una propiedad tendrías que buscar y contratar abogados, gestores y brokers, sin garantía de obtener los resultados que esperas.</p>
+          <p>Despreocúpate de eso y evita fraudes o malos servicios. <strong>Blocksale lo hace por ti</strong>, con un equipo de abogados y gestores de gran experiencia que resolverán el problema de tu propiedad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="block steps" id="proceso">
+  <div class="wrap">
+    <div class="sec-head c reveal">
+      <span class="eyebrow c">Cómo funciona</span>
+      <h2>Cuatro pasos. Cero anticipos.</h2>
+      <p>Un proceso claro de principio a fin: nosotros ponemos los gastos, el equipo y el tiempo.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso on reveal d1"><div class="track"></div><div class="num">01</div><h3>Nos cuentas</h3><p>Escríbenos tu caso por WhatsApp. Te escuchamos sin compromiso ni tecnicismos.</p></div>
+      <div class="paso on reveal d2"><div class="track"></div><div class="num">02</div><h3>Analizamos</h3><p>Revisamos la situación legal y trazamos una ruta clara con tiempos reales.</p></div>
+      <div class="paso on reveal d3"><div class="track"></div><div class="num">03</div><h3>Regularizamos</h3><p>Abogados y gestores resuelven herencias, escrituras y trámites. Adelantamos los gastos.</p></div>
+      <div class="paso on reveal d4"><div class="num">04</div><h3>Vendes</h3><p>Una vez limpia, nuestros brokers la venden al mejor precio. Tú recibes tu dinero, en paz.</p></div>
+    </div>
+  </div>
+</section>
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <span class="ring r1"></span><span class="ring r2"></span>
+      <div class="in">
+        <span class="eyebrow">Da el primer paso</span>
+        <h2>Tu propiedad merece una salida. Tú mereces tranquilidad.</h2>
+        <p>Cuéntanos tu caso hoy. Te escuchamos sin compromiso y te decimos con claridad cómo podemos ayudarte.</p>
+        <div class="cta-actions">
+          <a href="cuestionario.html" class="btn btn-light">Compártenos tu problema <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="https://api.whatsapp.com/send?phone=+525574496392&text=%C2%A1Hola!+Solicito+informaci%C3%B3n...+" class="btn btn-ghost-l">Escríbenos por WhatsApp</a>
+        </div>
+        <p class="note">Respuesta el mismo día · Lunes a viernes 9:00–18:00 hrs</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><span class="mark"></span>Block<b>sale</b></a>
+        <p>Transformamos los problemas legales de propiedades en soluciones claras, para que las familias vivan en paz.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/blocksale.mx" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/profile.php?id=61574992897962" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol"><h4>Acerca de</h4><a href="acerca-de-blocksale.html">La Compañía</a><a href="conoce-a-nuestros-clientes.html">Conoce a nuestros clientes</a><a href="#contacto">Contáctanos</a></div>
+      <div class="fcol"><h4>Servicios</h4><a href="cuestionario.html">Quiero vender</a><a href="quiero-invertir.html">Quiero invertir</a></div>
+      <div class="fcol"><h4>Políticas</h4><a href="https://www.blocksale.mx/terminos-y-condiciones.html">Términos y Condiciones</a><a href="https://www.blocksale.mx/aviso-de-privacidad.html">Política de Privacidad</a></div>
+    </div>
+    <div class="foot-div"></div>
+    <div class="foot-contact">
+      <div>
+        <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span><b>Correo</b><a href="mailto:contacto@blocksale.mx">contacto@blocksale.mx</a></span></div>
+        <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><b>WhatsApp</b><a href="https://api.whatsapp.com/send?phone=+525574496392&text=%C2%A1Hola!+Solicito+informaci%C3%B3n...+">+52 55 7449 6392</a></span></div>
+      </div>
+      <div>
+        <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><b>Ciudad de México</b>Av. Insurgentes Sur 1079, Piso 7, Col. del Valle Sur, Benito Juárez, 03720 CDMX</span></div>
+        <div class="crow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><b>Jalisco</b>Av. Punto Sur 312, Piso 5, Tlajomulco de Zúñiga, C.P. 45640 · <a href="tel:+525597736656">+52 55 9773 6656</a></span></div>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Blocksale · Todos los derechos reservados</span><span>Lunes a viernes · 9:00–18:00 hrs</span></div>
+  </div>
+</footer>
+<a class="wa-float" href="https://api.whatsapp.com/send?phone=+525574496392&text=%C2%A1Hola!+Solicito+informaci%C3%B3n...+" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.512 5.26l-.999 3.648 3.736-.979z"/></svg></a>
+<script>
+  const header=document.getElementById('header');
+  const onScroll=()=>header.classList.toggle('scrolled',window.scrollY>40);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  document.documentElement.classList.add('js');
+  const reveals=document.querySelectorAll('.reveal');
+  const show=el=>el.classList.add('in');
+  const inView=el=>{const r=el.getBoundingClientRect();return r.top<(window.innerHeight||0)&&r.bottom>0;};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(el=>io.observe(el));
+    reveals.forEach(el=>{if(inView(el))show(el);});
+    setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(show),1500);
+  }else{reveals.forEach(show);}
+  const mb=document.querySelector('.menu-btn');
+  const mob=document.getElementById('mob-drawer');
+  const openMob=()=>mob.classList.add('open');
+  const closeMob=()=>mob.classList.remove('open');
+  mb&&mb.addEventListener('click',openMob);
+  document.getElementById('mob-close').addEventListener('click',closeMob);
+  document.getElementById('mob-overlay').addEventListener('click',closeMob);
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMob));
+</script>
+</body>
+</html>
